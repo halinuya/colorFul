@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		330D4ABF1B007D400030250F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D4ABE1B007D400030250F /* main.m */; };
+		330D4AC21B007D400030250F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D4AC11B007D400030250F /* AppDelegate.m */; };
+		330D4AC51B007D400030250F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D4AC41B007D400030250F /* GameScene.m */; };
+		330D4AC71B007D400030250F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 330D4AC61B007D400030250F /* GameScene.sks */; };
+		330D4ACA1B007D400030250F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D4AC91B007D400030250F /* GameViewController.m */; };
+		330D4ACD1B007D400030250F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330D4ACB1B007D400030250F /* Main.storyboard */; };
+		330D4ACF1B007D400030250F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330D4ACE1B007D400030250F /* Images.xcassets */; };
+		330D4AD21B007D400030250F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330D4AD01B007D400030250F /* LaunchScreen.xib */; };
+		330D4ADE1B007D410030250F /* colorsfulTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D4ADD1B007D410030250F /* colorsfulTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		330D4AD81B007D410030250F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 330D4AB11B007D400030250F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 330D4AB81B007D400030250F;
+			remoteInfo = colorsful;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		330D4AB91B007D400030250F /* colorsful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = colorsful.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		330D4ABD1B007D400030250F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		330D4ABE1B007D400030250F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		330D4AC01B007D400030250F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		330D4AC11B007D400030250F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		330D4AC31B007D400030250F /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		330D4AC41B007D400030250F /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		330D4AC61B007D400030250F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		330D4AC81B007D400030250F /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		330D4AC91B007D400030250F /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		330D4ACC1B007D400030250F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		330D4ACE1B007D400030250F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		330D4AD11B007D400030250F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		330D4AD71B007D410030250F /* colorsfulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = colorsfulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		330D4ADC1B007D410030250F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		330D4ADD1B007D410030250F /* colorsfulTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = colorsfulTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		330D4AB61B007D400030250F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		330D4AD41B007D410030250F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		330D4AB01B007D400030250F = {
+			isa = PBXGroup;
+			children = (
+				330D4ABB1B007D400030250F /* colorsful */,
+				330D4ADA1B007D410030250F /* colorsfulTests */,
+				330D4ABA1B007D400030250F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		330D4ABA1B007D400030250F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				330D4AB91B007D400030250F /* colorsful.app */,
+				330D4AD71B007D410030250F /* colorsfulTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		330D4ABB1B007D400030250F /* colorsful */ = {
+			isa = PBXGroup;
+			children = (
+				330D4AC01B007D400030250F /* AppDelegate.h */,
+				330D4AC11B007D400030250F /* AppDelegate.m */,
+				330D4AC31B007D400030250F /* GameScene.h */,
+				330D4AC41B007D400030250F /* GameScene.m */,
+				330D4AC61B007D400030250F /* GameScene.sks */,
+				330D4AC81B007D400030250F /* GameViewController.h */,
+				330D4AC91B007D400030250F /* GameViewController.m */,
+				330D4ACB1B007D400030250F /* Main.storyboard */,
+				330D4ACE1B007D400030250F /* Images.xcassets */,
+				330D4AD01B007D400030250F /* LaunchScreen.xib */,
+				330D4ABC1B007D400030250F /* Supporting Files */,
+			);
+			path = colorsful;
+			sourceTree = "<group>";
+		};
+		330D4ABC1B007D400030250F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				330D4ABD1B007D400030250F /* Info.plist */,
+				330D4ABE1B007D400030250F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		330D4ADA1B007D410030250F /* colorsfulTests */ = {
+			isa = PBXGroup;
+			children = (
+				330D4ADD1B007D410030250F /* colorsfulTests.m */,
+				330D4ADB1B007D410030250F /* Supporting Files */,
+			);
+			path = colorsfulTests;
+			sourceTree = "<group>";
+		};
+		330D4ADB1B007D410030250F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				330D4ADC1B007D410030250F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		330D4AB81B007D400030250F /* colorsful */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 330D4AE11B007D410030250F /* Build configuration list for PBXNativeTarget "colorsful" */;
+			buildPhases = (
+				330D4AB51B007D400030250F /* Sources */,
+				330D4AB61B007D400030250F /* Frameworks */,
+				330D4AB71B007D400030250F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = colorsful;
+			productName = colorsful;
+			productReference = 330D4AB91B007D400030250F /* colorsful.app */;
+			productType = "com.apple.product-type.application";
+		};
+		330D4AD61B007D410030250F /* colorsfulTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 330D4AE41B007D410030250F /* Build configuration list for PBXNativeTarget "colorsfulTests" */;
+			buildPhases = (
+				330D4AD31B007D410030250F /* Sources */,
+				330D4AD41B007D410030250F /* Frameworks */,
+				330D4AD51B007D410030250F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				330D4AD91B007D410030250F /* PBXTargetDependency */,
+			);
+			name = colorsfulTests;
+			productName = colorsfulTests;
+			productReference = 330D4AD71B007D410030250F /* colorsfulTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		330D4AB11B007D400030250F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "James wu";
+				TargetAttributes = {
+					330D4AB81B007D400030250F = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					330D4AD61B007D410030250F = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 330D4AB81B007D400030250F;
+					};
+				};
+			};
+			buildConfigurationList = 330D4AB41B007D400030250F /* Build configuration list for PBXProject "colorsful" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 330D4AB01B007D400030250F;
+			productRefGroup = 330D4ABA1B007D400030250F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				330D4AB81B007D400030250F /* colorsful */,
+				330D4AD61B007D410030250F /* colorsfulTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		330D4AB71B007D400030250F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330D4AD21B007D400030250F /* LaunchScreen.xib in Resources */,
+				330D4ACF1B007D400030250F /* Images.xcassets in Resources */,
+				330D4AC71B007D400030250F /* GameScene.sks in Resources */,
+				330D4ACD1B007D400030250F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		330D4AD51B007D410030250F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		330D4AB51B007D400030250F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330D4ACA1B007D400030250F /* GameViewController.m in Sources */,
+				330D4AC21B007D400030250F /* AppDelegate.m in Sources */,
+				330D4AC51B007D400030250F /* GameScene.m in Sources */,
+				330D4ABF1B007D400030250F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		330D4AD31B007D410030250F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330D4ADE1B007D410030250F /* colorsfulTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		330D4AD91B007D410030250F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 330D4AB81B007D400030250F /* colorsful */;
+			targetProxy = 330D4AD81B007D410030250F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		330D4ACB1B007D400030250F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				330D4ACC1B007D400030250F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		330D4AD01B007D400030250F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				330D4AD11B007D400030250F /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		330D4ADF1B007D410030250F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		330D4AE01B007D410030250F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		330D4AE21B007D410030250F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = colorsful/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		330D4AE31B007D410030250F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = colorsful/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		330D4AE51B007D410030250F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = colorsfulTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/colorsful.app/colorsful";
+			};
+			name = Debug;
+		};
+		330D4AE61B007D410030250F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = colorsfulTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/colorsful.app/colorsful";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		330D4AB41B007D400030250F /* Build configuration list for PBXProject "colorsful" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330D4ADF1B007D410030250F /* Debug */,
+				330D4AE01B007D410030250F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		330D4AE11B007D410030250F /* Build configuration list for PBXNativeTarget "colorsful" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330D4AE21B007D410030250F /* Debug */,
+				330D4AE31B007D410030250F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		330D4AE41B007D410030250F /* Build configuration list for PBXNativeTarget "colorsfulTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330D4AE51B007D410030250F /* Debug */,
+				330D4AE61B007D410030250F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 330D4AB11B007D400030250F /* Project object */;
+}
