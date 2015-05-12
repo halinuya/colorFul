@@ -129,13 +129,21 @@
         }
     }
 }
+- (CGPoint)nodePosition:(CGPoint)location
+{
+    CGFloat x = ((location.x - _backgroundOrigin.x)/_SquareLength )*_SquareLength + _SquareLength/2;
+    CGFloat y = ((location.y - _backgroundOrigin.y)/_SquareLength )*_SquareLength + _SquareLength/2;
+    return CGPointMake(x, y);
+}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     /* Called when a touch begins */
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    CGPoint nodePosition = [self nodePosition:location];
+    
+    SKNode *node = [self nodeAtPoint:nodePosition];
     if ([node.name isEqual:@"backSquare"])
     {
         [self debugColorSquareInfo:node];
@@ -225,7 +233,7 @@
         [resultDic setObject:valueArray forKey:color];
     }
     
-    NSLog(@"resultDic:%@", resultDic);
+//    NSLog(@"resultDic:%@", resultDic);
     [resultDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSMutableArray *array = (NSMutableArray *)obj;
         if ([array count] > 1) {
