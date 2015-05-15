@@ -12,7 +12,8 @@
 @property (nonatomic) CGFloat SquareLength;
 @property (nonatomic) CGPoint backgroundOrigin;
 
-
+@property (nonatomic ,strong) NSMutableArray *colorFulSquares;
+@property (nonatomic,strong) dispatch_queue_t dealQueue;
 @end
 
 @implementation GameScene
@@ -22,7 +23,8 @@
     if (self)
     {
         self.backgroundColor = [UIColor cyanColor];
-        
+        self.dealQueue = dispatch_queue_create("com.tallmantech.colorful", DISPATCH_QUEUE_SERIAL);
+        self.colorFulSquares = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -30,6 +32,18 @@
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [UIColor cyanColor];
     [self addBackground];
+    [self addSquare];
+}
+
+- (void)refreshGame
+{
+    for ( SKNode *node in self.colorFulSquares)
+    {
+        [node removeFromParent];
+    }
+    
+    [self.colorFulSquares removeAllObjects];
+    
     [self addSquare];
 }
 
@@ -78,12 +92,14 @@
             CGFloat positionY = _backgroundOrigin.y + _SquareLength/2+ _SquareLength*i;
             node.position = CGPointMake(positionX, positionY);
             
-            NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"colorSquare",@"nodeType",[NSValue valueWithCGPoint:CGPointMake(positionX, positionY)],@"position",[node color],@"color",nil];
+            NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"colorSquare",@"nodeType",[NSValue valueWithCGPoint:CGPointMake(positionX, positionY)],@"position",[node color],@"color",@"YES",@"exsit",nil];
             //            NSLog(@"userData:%@",userData);
             node.userData = userData;
             
             // 5 设置节点的名字，并加入到scene场景。
             node.name = @"colorSquare";
+            [self.colorFulSquares addObject:node];
+            
             [self addChild:node];
         }
     }
@@ -131,8 +147,11 @@
 }
 - (CGPoint)nodePosition:(CGPoint)location
 {
-    CGFloat x = ((location.x - _backgroundOrigin.x)/_SquareLength )*_SquareLength + _SquareLength/2;
-    CGFloat y = ((location.y - _backgroundOrigin.y)/_SquareLength )*_SquareLength + _SquareLength/2;
+    int countX = (location.x - _backgroundOrigin.x)/_SquareLength;
+    int countY = (location.y - _backgroundOrigin.y)/_SquareLength;
+    CGFloat x = _backgroundOrigin.x + countX*_SquareLength + _SquareLength/2;
+    CGFloat y = _backgroundOrigin.y + countY*_SquareLength + _SquareLength/2;
+//    NSLog(@"[%f,%f,%f,%f,%d,%d]:%f",location.x,location.y,x,y,countX,countY,_SquareLength);
     return CGPointMake(x, y);
 }
 
@@ -142,18 +161,136 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     CGPoint nodePosition = [self nodePosition:location];
-    
     SKNode *node = [self nodeAtPoint:nodePosition];
+    
     if ([node.name isEqual:@"backSquare"])
     {
-        [self debugColorSquareInfo:node];
-        [self dealWithBackNode:node];
+//        [self debugColorSquareInfo:node];
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(self.dealQueue, ^{
+            [weakSelf dealWithBackNode:node];
+            if (![self isExsitColorSquareToEliminate])
+            {
+                [self refreshGame];
+                NSLog(@"refresh game");
+            }
+            
+        });
     }
     else if ([node.name isEqual:@"colorSquare"])
     {
 
     }
+    
+    
 
+}
+
+- (BOOL)isExsitColorSquareToEliminate
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            CGPoint p = CGPointMake(_backgroundOrigin.x + _SquareLength/2 + i*_SquareLength, _backgroundOrigin.y + _SquareLength/2 + j*_SquareLength);
+            SKNode *node = [self nodeAtPoint:p];
+            if ([node.name isEqual:@"backSquare"])
+            {
+                NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                
+                NSValue *positionValue = (NSValue *)[node.userData objectForKey:@"position"];
+                CGPoint position = [positionValue CGPointValue];
+                
+                CGFloat positionX = position.x;
+                CGFloat positionY = position.y;
+                
+                CGFloat minX = _backgroundOrigin.x+_SquareLength/2;
+                CGFloat minY = _backgroundOrigin.y+_SquareLength/2;
+                
+                CGFloat maxX = _backgroundOrigin.x+_SquareLength/2 + _SquareLength*7;
+                CGFloat maxY = _backgroundOrigin.y+_SquareLength/2 + _SquareLength*7;
+                
+                // 1 left
+                for (CGFloat x = positionX - _SquareLength; x >= minX; x=x-_SquareLength) {
+                    SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
+                    if ([self isExsitColorNode:node]) {
+                        [tempArray addObject:node];
+                        break;
+                    }
+                }
+                
+                // 2 right
+                for (CGFloat x = positionX + _SquareLength; x <= maxX; x=x+_SquareLength) {
+                    SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
+                    if ([self isExsitColorNode:node]) {
+                        [tempArray addObject:node];
+                        break;
+                    }
+                }
+                
+                // 3 down
+                for (CGFloat y = positionY - _SquareLength; y >= minY; y=y-_SquareLength) {
+                    SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
+                    if ([self isExsitColorNode:node]) {
+                        [tempArray addObject:node];
+                        break;
+                    }
+                }
+                
+                // 4 up
+                for (CGFloat y = positionY + _SquareLength; y <= maxY; y=y+_SquareLength) {
+                    SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
+                    if ([self isExsitColorNode:node]) {
+                        [tempArray addObject:node];
+                        break;
+                    }
+                }
+                
+                //    NSLog(@"colorNodes:%@",tempArray);
+                
+                NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+                for (SKNode *node in tempArray)
+                {
+                    NSMutableArray *valueArray;
+                    UIColor *color = [node.userData objectForKey:@"color"];
+                    if (color == nil) {
+                        break;
+                    }
+                    
+                    if ([resultDic objectForKey:color] == nil)
+                    {
+                        valueArray = [[NSMutableArray alloc] init];
+                        
+                    }
+                    else
+                    {
+                        valueArray = (NSMutableArray *)[resultDic objectForKey:color];
+                    }
+                    
+                    [valueArray addObject:node];
+                    [resultDic setObject:valueArray forKey:color];
+                }
+                
+                for (NSString *key in resultDic  )
+                {
+                    NSMutableArray *array = (NSMutableArray *)[resultDic objectForKey:key];
+                    if ([array count] > 1)
+                    {
+                        return YES;
+                    }
+                }
+            }
+        }
+    }
+    return NO;
+}
+
+- (BOOL)isExsitColorNode:(SKNode *)node
+{
+    if ([node.name isEqual:@"colorSquare"] && [[node.userData objectForKey:@"exsit"] isEqualToString:@"YES"]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)dealWithBackNode:(SKNode *)node
@@ -175,7 +312,7 @@
     // 1 left
     for (CGFloat x = positionX - _SquareLength; x >= minX; x=x-_SquareLength) {
         SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
-        if ([node.name isEqual:@"colorSquare"]) {
+        if ([self isExsitColorNode:node]) {
             [tempArray addObject:node];
             break;
         }
@@ -184,7 +321,7 @@
     // 2 right
     for (CGFloat x = positionX + _SquareLength; x <= maxX; x=x+_SquareLength) {
         SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
-        if ([node.name isEqual:@"colorSquare"]) {
+        if ([self isExsitColorNode:node]) {
             [tempArray addObject:node];
             break;
         }
@@ -193,7 +330,7 @@
     // 3 down
     for (CGFloat y = positionY - _SquareLength; y >= minY; y=y-_SquareLength) {
         SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
-        if ([node.name isEqual:@"colorSquare"]) {
+        if ([self isExsitColorNode:node]) {
             [tempArray addObject:node];
             break;
         }
@@ -202,7 +339,7 @@
     // 4 up
     for (CGFloat y = positionY + _SquareLength; y <= maxY; y=y+_SquareLength) {
         SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
-        if ([node.name isEqual:@"colorSquare"]) {
+        if ([self isExsitColorNode:node]) {
             [tempArray addObject:node];
             break;
         }
@@ -237,32 +374,16 @@
     [resultDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSMutableArray *array = (NSMutableArray *)obj;
         if ([array count] > 1) {
-            [self removeChildrenInArray:array];
+            for (SKNode *node in array) {
+                [node.userData setObject:@"NO" forKey:@"exsit"];
+                SKAction *fadeOut = [SKAction fadeOutWithDuration:0.5];
+                SKAction *removeAction = [SKAction removeFromParent];
+                SKAction *all = [SKAction sequence:@[fadeOut, removeAction]];
+                [node runAction:all];
+            }
         }
     }];
     
-//    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-//    while ([tempArray count])
-//    {
-//        SKNode *node = [tempArray firstObject];
-//        [tempArray removeObjectAtIndex:0];
-//        
-//        for (SKNode *nodeInTemp in tempArray)
-//        {
-//            if ([self isSameColorNode:node WithNode:nodeInTemp])
-//            {
-//                [resultArray addObject:nodeInTemp];
-//                if (![resultArray containsObject:node])
-//                {
-//                    [resultArray addObject:node];
-//                }
-//            }
-//        }
-//    }
-//    
-//    for (SKNode *node in resultArray) {
-//        [node removeFromParent];
-//    }
 }
 
 - (BOOL)isSameColorNode:(SKNode *)node WithNode:(SKNode *)OtherNode

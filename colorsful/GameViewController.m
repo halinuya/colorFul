@@ -10,7 +10,6 @@
 #import "GameScene.h"
 
 @interface GameViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *gameStartBtn;
 
 @end
 
@@ -38,38 +37,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    SKView * skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+    /* Sprite Kit applies additional optimizations to improve rendering performance */
+    skView.ignoresSiblingOrder = YES;
+    
+    // Create and configure the scene.
+    //    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
+    GameScene *scene = [[GameScene alloc] initWithSize:self.view.frame.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    // Present the scene.
+    [skView presentScene:scene];
 
-
-}
-
-- (IBAction)gameStartBtnPress:(id)sender {
-    // Configure the view.
-    
-    [UIView animateWithDuration:1.0f animations:^{
-        [self.gameStartBtn setAlpha:0.0];
-        [self.gameStartBtn setFrame:CGRectMake(-self.gameStartBtn.frame.size.width, -self.gameStartBtn.frame.size.height, self.gameStartBtn.frame.size.width, self.gameStartBtn.frame.size.height)];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            SKView * skView = (SKView *)self.view;
-            skView.showsFPS = YES;
-            skView.showsNodeCount = YES;
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = YES;
-            
-            // Create and configure the scene.
-            //    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-            GameScene *scene = [[GameScene alloc] initWithSize:self.view.frame.size];
-            scene.scaleMode = SKSceneScaleModeAspectFill;
-            
-            // Present the scene.
-            [skView presentScene:scene];
-        }
-    }];
-    
-    
-    
-    
-    
 }
 
 - (BOOL)shouldAutorotate
