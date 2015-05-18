@@ -35,18 +35,7 @@
     [self addSquare];
 }
 
-- (void)refreshGame
-{
-    for ( SKNode *node in self.colorFulSquares)
-    {
-        [node removeFromParent];
-    }
-    
-    [self.colorFulSquares removeAllObjects];
-    
-    [self addSquare];
-}
-
+#pragma mark - init and layout
 - (void)addSquare
 {
     // 1 设置彩色方砖的长度
@@ -145,16 +134,8 @@
         }
     }
 }
-- (CGPoint)nodePosition:(CGPoint)location
-{
-    int countX = (location.x - _backgroundOrigin.x)/_SquareLength;
-    int countY = (location.y - _backgroundOrigin.y)/_SquareLength;
-    CGFloat x = _backgroundOrigin.x + countX*_SquareLength + _SquareLength/2;
-    CGFloat y = _backgroundOrigin.y + countY*_SquareLength + _SquareLength/2;
-//    NSLog(@"[%f,%f,%f,%f,%d,%d]:%f",location.x,location.y,x,y,countX,countY,_SquareLength);
-    return CGPointMake(x, y);
-}
 
+#pragma mark - touch process
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     /* Called when a touch begins */
@@ -181,10 +162,45 @@
     {
 
     }
-    
-    
 
 }
+
+- (void)dealWithBackNode:(SKNode *)node
+{
+    NSMutableArray *tempArray;
+    tempArray = [self findFourDirectSquareOfSKNode:node];
+    //    NSLog(@"colorNodes:%@",tempArray);
+    
+    NSMutableDictionary *resultDic = [self findSameSquareInArray:tempArray];
+    //    NSLog(@"resultDic:%@", resultDic);
+    
+    [resultDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSMutableArray *array = (NSMutableArray *)obj;
+        if ([array count] > 1) {
+            for (SKNode *node in array) {
+                [node.userData setObject:@"NO" forKey:@"exsit"];
+                SKAction *fadeOut = [SKAction fadeOutWithDuration:0.5];
+                SKAction *removeAction = [SKAction removeFromParent];
+                SKAction *all = [SKAction sequence:@[fadeOut, removeAction]];
+                [node runAction:all];
+            }
+        }
+    }];
+    
+}
+
+- (void)refreshGame
+{
+    for ( SKNode *node in self.colorFulSquares)
+    {
+        [node removeFromParent];
+    }
+    
+    [self.colorFulSquares removeAllObjects];
+    
+    [self addSquare];
+}
+
 
 - (BOOL)isExsitColorSquareToEliminate
 {
@@ -196,80 +212,9 @@
             SKNode *node = [self nodeAtPoint:p];
             if ([node.name isEqual:@"backSquare"])
             {
-                NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-                
-                NSValue *positionValue = (NSValue *)[node.userData objectForKey:@"position"];
-                CGPoint position = [positionValue CGPointValue];
-                
-                CGFloat positionX = position.x;
-                CGFloat positionY = position.y;
-                
-                CGFloat minX = _backgroundOrigin.x+_SquareLength/2;
-                CGFloat minY = _backgroundOrigin.y+_SquareLength/2;
-                
-                CGFloat maxX = _backgroundOrigin.x+_SquareLength/2 + _SquareLength*7;
-                CGFloat maxY = _backgroundOrigin.y+_SquareLength/2 + _SquareLength*7;
-                
-                // 1 left
-                for (CGFloat x = positionX - _SquareLength; x >= minX; x=x-_SquareLength) {
-                    SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
-                    if ([self isExsitColorNode:node]) {
-                        [tempArray addObject:node];
-                        break;
-                    }
-                }
-                
-                // 2 right
-                for (CGFloat x = positionX + _SquareLength; x <= maxX; x=x+_SquareLength) {
-                    SKNode *node = [self nodeAtPoint:CGPointMake(x, positionY)];
-                    if ([self isExsitColorNode:node]) {
-                        [tempArray addObject:node];
-                        break;
-                    }
-                }
-                
-                // 3 down
-                for (CGFloat y = positionY - _SquareLength; y >= minY; y=y-_SquareLength) {
-                    SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
-                    if ([self isExsitColorNode:node]) {
-                        [tempArray addObject:node];
-                        break;
-                    }
-                }
-                
-                // 4 up
-                for (CGFloat y = positionY + _SquareLength; y <= maxY; y=y+_SquareLength) {
-                    SKNode *node = [self nodeAtPoint:CGPointMake(positionX , y)];
-                    if ([self isExsitColorNode:node]) {
-                        [tempArray addObject:node];
-                        break;
-                    }
-                }
-                
-                //    NSLog(@"colorNodes:%@",tempArray);
-                
-                NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
-                for (SKNode *node in tempArray)
-                {
-                    NSMutableArray *valueArray;
-                    UIColor *color = [node.userData objectForKey:@"color"];
-                    if (color == nil) {
-                        break;
-                    }
-                    
-                    if ([resultDic objectForKey:color] == nil)
-                    {
-                        valueArray = [[NSMutableArray alloc] init];
-                        
-                    }
-                    else
-                    {
-                        valueArray = (NSMutableArray *)[resultDic objectForKey:color];
-                    }
-                    
-                    [valueArray addObject:node];
-                    [resultDic setObject:valueArray forKey:color];
-                }
+                NSMutableArray *tempArray = [self findFourDirectSquareOfSKNode:node];
+                NSMutableDictionary *resultDic;
+                resultDic = [self findSameSquareInArray:tempArray];
                 
                 for (NSString *key in resultDic  )
                 {
@@ -285,15 +230,36 @@
     return NO;
 }
 
-- (BOOL)isExsitColorNode:(SKNode *)node
+- (NSMutableDictionary *)findSameSquareInArray:(NSMutableArray *)tempArray
 {
-    if ([node.name isEqual:@"colorSquare"] && [[node.userData objectForKey:@"exsit"] isEqualToString:@"YES"]) {
-        return YES;
+    //    NSLog(@"colorNodes:%@",tempArray);
+    
+    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+    for (SKNode *node in tempArray)
+    {
+        NSMutableArray *valueArray;
+        UIColor *color = [node.userData objectForKey:@"color"];
+        if (color == nil) {
+            return nil;
+        }
+        
+        if ([resultDic objectForKey:color] == nil)
+        {
+            valueArray = [[NSMutableArray alloc] init];
+            
+        }
+        else
+        {
+            valueArray = (NSMutableArray *)[resultDic objectForKey:color];
+        }
+        
+        [valueArray addObject:node];
+        [resultDic setObject:valueArray forKey:color];
     }
-    return NO;
+    return resultDic;
 }
 
-- (void)dealWithBackNode:(SKNode *)node
+- (NSMutableArray *)findFourDirectSquareOfSKNode:(SKNode *)node
 {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
@@ -344,59 +310,41 @@
             break;
         }
     }
-    
-//    NSLog(@"colorNodes:%@",tempArray);
-    
-    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
-    for (SKNode *node in tempArray)
-    {
-        NSMutableArray *valueArray;
-        UIColor *color = [node.userData objectForKey:@"color"];
-        if (color == nil) {
-            break;
-        }
-        
-        if ([resultDic objectForKey:color] == nil)
-        {
-            valueArray = [[NSMutableArray alloc] init];
-            
-        }
-        else
-        {
-            valueArray = (NSMutableArray *)[resultDic objectForKey:color];
-        }
-        
-        [valueArray addObject:node];
-        [resultDic setObject:valueArray forKey:color];
-    }
-    
-//    NSLog(@"resultDic:%@", resultDic);
-    [resultDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSMutableArray *array = (NSMutableArray *)obj;
-        if ([array count] > 1) {
-            for (SKNode *node in array) {
-                [node.userData setObject:@"NO" forKey:@"exsit"];
-                SKAction *fadeOut = [SKAction fadeOutWithDuration:0.5];
-                SKAction *removeAction = [SKAction removeFromParent];
-                SKAction *all = [SKAction sequence:@[fadeOut, removeAction]];
-                [node runAction:all];
-            }
-        }
-    }];
-    
+    return tempArray;
 }
 
-- (BOOL)isSameColorNode:(SKNode *)node WithNode:(SKNode *)OtherNode
-{
-    return [[node.userData objectForKey:@"color"] isEqual:[OtherNode.userData objectForKey:@"color"]];
-}
-
+#pragma mark - time process
 -(void)update:(CFTimeInterval)currentTime
 {
 
 }
 
-#pragma mark - debug interface
+#pragma mark - helper method
+- (BOOL)isSameColorNode:(SKNode *)node WithNode:(SKNode *)OtherNode
+{
+    return [[node.userData objectForKey:@"color"] isEqual:[OtherNode.userData objectForKey:@"color"]];
+}
+
+- (BOOL)isExsitColorNode:(SKNode *)node
+{
+    if ([node.name isEqual:@"colorSquare"] && [[node.userData objectForKey:@"exsit"] isEqualToString:@"YES"]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (CGPoint)nodePosition:(CGPoint)location
+{
+    int countX = (location.x - _backgroundOrigin.x)/_SquareLength;
+    int countY = (location.y - _backgroundOrigin.y)/_SquareLength;
+    CGFloat x = _backgroundOrigin.x + countX*_SquareLength + _SquareLength/2;
+    CGFloat y = _backgroundOrigin.y + countY*_SquareLength + _SquareLength/2;
+    //    NSLog(@"[%f,%f,%f,%f,%d,%d]:%f",location.x,location.y,x,y,countX,countY,_SquareLength);
+    return CGPointMake(x, y);
+}
+
+
+#pragma mark - debug
 - (void)debugColorSquareInfo:(SKNode *)node
 {
     if (node.userData != nil) {
