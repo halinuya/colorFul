@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>27A48FBE-A62B-440F-9A32-A51CD1EB21B0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>colorsful</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2FCC93B3495F17CB94DE205E8756BA03A8201FB1</key>
+		<string>https://github.com/halinuya/colorFul.git</string>
+		<key>B528E8E31C59FEAF7287F81E249C7DD7D5C3FA80</key>
+		<string>https://git.oschina.net/halinuya/GameDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>colorsful.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2FCC93B3495F17CB94DE205E8756BA03A8201FB1</key>
+		<string>../..</string>
+		<key>B528E8E31C59FEAF7287F81E249C7DD7D5C3FA80</key>
+		<string>../../../GameDemo</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/halinuya/colorFul.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2FCC93B3495F17CB94DE205E8756BA03A8201FB1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2FCC93B3495F17CB94DE205E8756BA03A8201FB1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>colorFul</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B528E8E31C59FEAF7287F81E249C7DD7D5C3FA80</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GameDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
